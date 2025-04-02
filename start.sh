@@ -16,11 +16,11 @@ if [ ! -f "$TA_KEY" ] || [ ! -d "$PKI_DIR" ]; then
     # Генерация PKI и сертификатов
     if [ ! -d "$PKI_DIR" ]; then
         cd /etc/openvpn/easy-rsa
-        ./easyrsa init-pki
-        ./easyrsa build-ca
-        ./easyrsa gen-req server nopass
-        ./easyrsa sign-req server server
-        ./easyrsa gen-dh
+        easyrsa init-pki
+        easyrsa build-ca
+        easyrsa gen-req server nopass
+        easyrsa sign-req server server
+        easyrsa gen-dh
     fi
 fi
 

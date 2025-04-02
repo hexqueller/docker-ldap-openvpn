@@ -9,20 +9,6 @@ PKI_DIR="/etc/openvpn/easy-rsa/pki"
 EASYRSA_DIR="/etc/openvpn/easy-rsa" # Указываем базовый каталог
 EASYRSA_CMD="/usr/share/easy-rsa/easyrsa"
 
-# Проверка существования команды easyrsa
-if [ ! -x "$EASYRSA_CMD" ]; then
-  echo "Ошибка: Команда easyrsa не найдена по пути $EASYRSA_CMD"
-  # Попробуйте найти ее, если она в другом месте (на всякий случай)
-  ALT_PATH=$(find /usr -name easyrsa -type f -executable 2>/dev/null | head -n 1)
-  if [ -n "$ALT_PATH" ]; then
-      echo "Найдена альтернатива: $ALT_PATH"
-      EASYRSA_CMD="$ALT_PATH"
-  else
-      echo "Установите easy-rsa: apk add easy-rsa"
-      exit 1
-  fi
-fi
-
 # Переходим в каталог easy-rsa перед выполнением команд
 mkdir -p "$EASYRSA_DIR"
 cd "$EASYRSA_DIR"

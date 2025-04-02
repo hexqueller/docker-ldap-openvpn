@@ -13,6 +13,6 @@ services:
       - "2402:2402/udp"
     volumes:
       - ./server.conf:/etc/openvpn/server/server.conf:ro
-      - ./easy-rsa:/etc/openvpn/easy-rsa
-      - ./log:/var/log/openvpn
+      - ./data/easy-rsa:/etc/openvpn/easy-rsa
+      - ./data/log:/var/log/openvpn
     command: ["/start.sh"]

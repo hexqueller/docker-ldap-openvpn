@@ -1,0 +1,14 @@
+services:
+  openvpn:
+    build: .
+    container_name: openvpn
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "1194:1194/udp"
+    volumes:
+      - ./server.conf:/etc/openvpn/server/server.conf:ro
+      - ./easy-rsa:/etc/openvpn/easy-rsa
+      - ./log:/var/log/openvpn
+    command: ["/start.sh"]

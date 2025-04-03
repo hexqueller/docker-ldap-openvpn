@@ -22,6 +22,8 @@ services:
   openldap:
     image: bitnami/openldap:2.6.9
     container_name: openldap
+    ports:
+      - "1389:1389"
     networks:
       - vpn-network
     environment:

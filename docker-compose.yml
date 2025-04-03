@@ -18,14 +18,15 @@ services:
       - ./ldap.conf:/etc/openvpn/auth/ldap.conf:ro
       - ./openvpn_data/easy-rsa:/etc/openvpn/easy-rsa
       - ./openvpn_data/log:/var/log/openvpn
+    depends_on:
+      - openldap
     command: ["/start.sh"]
 
   openldap:
     image: bitnami/openldap:2.6.9
     container_name: openldap
-    # ports:
-    #   - "1389:1389"
-    #   - "1636:1636"
+    ports:
+      - "389:389"
     networks:
       - vpn-network
     environment:

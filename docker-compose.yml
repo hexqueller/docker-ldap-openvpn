@@ -12,27 +12,26 @@ services:
     networks:
       - vpn-network
     ports:
-      - "2402:2402/udp"
+      - "${VPN_PORT}:${VPN_PORT}/udp"
+    environment:
+      - VPN_PORT=${VPN_PORT}
     volumes:
       - ./server.conf:/etc/openvpn/server/server.conf:ro
       - ./ldap.conf:/etc/openvpn/auth/ldap.conf:ro
       - ./openvpn_data/easy-rsa:/etc/openvpn/easy-rsa
-      - ./openvpn_data/log:/var/log/openvpn
     command: ["/start.sh"]
 
   openldap:
     image: bitnami/openldap:2.6.9
     container_name: openldap
-    ports:
-      - "1389:1389"
     networks:
       - vpn-network
     environment:
-      - LDAP_ADMIN_USERNAME=admin
-      - LDAP_ADMIN_PASSWORD=adminpassword
-      - LDAP_USERS=openvpn
-      - LDAP_PASSWORDS=openvpn
-      - LDAP_ROOT=dc=example,dc=org
+      - LDAP_ADMIN_USERNAME=${ADMIN_USERNAME}
+      - LDAP_ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - LDAP_USERS=${USERS}
+      - LDAP_PASSWORDS=${PASSWORDS}
+      - LDAP_ROOT=${LDAP_ROOT}
     volumes:
       - openldap_data:/bitnami/openldap
 

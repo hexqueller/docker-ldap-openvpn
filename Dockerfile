@@ -8,6 +8,5 @@ COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
 VOLUME ["/etc/openvpn"]
-EXPOSE 2402/udp
 
 CMD ["/start.sh"]

@@ -89,38 +89,6 @@ fi
 # Убедимся, что каталог для server.conf существует
 mkdir -p /etc/openvpn/server
 
-# Проверка существования файла конфигурации перед запуском
-if [ ! -f "/etc/openvpn/server/server.conf" ]; then
-    echo "Создание базового конфига сервера..."
-    cat > "/etc/openvpn/server/server.conf" <<EOF
-port 2402
-proto udp
-dev tun
-
-ca $PKI_DIR/ca.crt
-cert $PKI_DIR/issued/server.crt
-key $PKI_DIR/private/server.key
-dh $PKI_DIR/dh.pem
-tls-auth $TA_KEY 0
-
-server 10.8.0.0 255.255.255.0
-ifconfig-pool-persist /etc/openvpn/server/ipp.txt
-
-keepalive 10 120
-data-ciphers AES-256-GCM:AES-128-GCM:AES-256-CBC
-auth SHA256
-persist-key
-persist-tun
-
-status /etc/openvpn/server/openvpn-status.log
-verb 3
-
-username-as-common-name
-plugin /usr/lib/openvpn/plugins/openvpn-auth-ldap.so /etc/openvpn/auth/ldap.conf
-EOF
-    echo "Базовый конфиг сервера создан в /etc/openvpn/server/server.conf"
-fi
-
 # Настройка iptables
 echo "Настройка IPTables..."
 if ! iptables -t nat -C POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE > /dev/null 2>&1; then

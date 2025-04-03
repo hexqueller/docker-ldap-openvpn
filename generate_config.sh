@@ -1,15 +1,13 @@
 #!/bin/bash
 
 # Проверка аргументов
-if [ "$#" -ne 2 ]; then
-    echo "Использование: $0 <ИмяКлиента> <Сервер:Порт>" >&2
-    echo "Пример: $0 client1 vpn.example.com:2402" >&2
+if [ "$#" -ne 1 ]; then
+    echo "Использование: $0 <Сервер:Порт>" >&2
     exit 1
 fi
 
-CLIENT_NAME="$1"
-SERVER_INFO="$2"
-OUTPUT_FILE="${CLIENT_NAME}.ovpn"
+SERVER_INFO="$1"
+OUTPUT_FILE="client.ovpn"
 
 # Проверка, что Easy-RSA и TLS-ключи существуют
 CA_CERT="./openvpn_data/easy-rsa/pki/ca.crt"

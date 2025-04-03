@@ -1,8 +1,8 @@
 services:
 
-networks:
-  vpn-network:
-    driver: bridge
+  networks:
+    vpn-network:
+      driver: bridge
 
   openvpn:
     build: .

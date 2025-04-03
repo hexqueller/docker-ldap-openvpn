@@ -12,7 +12,7 @@ services:
     networks:
       - vpn-network
     ports:
-      - 2402:2402
+      - "2402:2402/udp"
     volumes:
       - ./server.conf:/etc/openvpn/server/server.conf:ro
       - ./ldap.conf:/etc/openvpn/auth/ldap.conf:ro

@@ -12,9 +12,7 @@ services:
     networks:
       - vpn-network
     ports:
-      - "${VPN_PORT}:${VPN_PORT}/udp"
-    environment:
-      - VPN_PORT=${VPN_PORT}
+      - "${VPN_PORT}:1194/udp"
     volumes:
       - ./server.conf:/etc/openvpn/server/server.conf:ro
       - ./ldap.conf:/etc/openvpn/auth/ldap.conf:ro

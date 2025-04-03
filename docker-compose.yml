@@ -1,9 +1,4 @@
 services:
-
-  networks:
-    vpn-network:
-      driver: bridge
-
   openvpn:
     build: .
     container_name: openvpn
@@ -41,3 +36,7 @@ services:
       - LDAP_ROOT=dc=example,dc=org
     volumes:
       - ./openldap_data:/bitnami/openldap
+
+networks:
+  vpn-network:
+    driver: bridge

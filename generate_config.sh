@@ -42,6 +42,7 @@ fi
     echo "auth SHA256"
     echo "cipher AES-256-GCM"
     echo "verb 3"
+    echo "redirect-gateway def1 bypass-dhcp"
     echo ""
     echo "<ca>"
     cat "$CA_CERT"

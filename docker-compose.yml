@@ -34,8 +34,12 @@ services:
       - LDAP_PASSWORDS=openvpn
       - LDAP_ROOT=dc=example,dc=org
     volumes:
-      - ./openldap_data:/bitnami/openldap
+      - openldap_data:/bitnami/openldap
 
 networks:
   vpn-network:
     driver: bridge
+
+volumes:
+  openldap_data:
+    driver: local

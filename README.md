@@ -1,7 +1,10 @@
+# OpenVPN Server with LDAP Authentication
 ```bash
-docker run -d --cap-add=NET_ADMIN --name openvpn \
-    -v $(pwd)/server.conf:/etc/openvpn/server/server.conf \
-    -v $(pwd)/easy-rsa:/etc/openvpn/easy-rsa \
-    -p 2402:2402/udp \
-    my-openvpn
+docker compose up -d --build
+```
+
+## Create client config
+```bash
+chmod +x ./generate_config.sh
+sudo ./generate_config.sh <server_addr> <server_port>
 ```

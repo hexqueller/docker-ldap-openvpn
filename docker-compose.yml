@@ -1,4 +1,9 @@
 services:
+
+networks:
+  vpn-network:
+    driver: bridge
+
   openvpn:
     build: .
     container_name: openvpn
@@ -9,6 +14,8 @@ services:
       - /dev/net/tun:/dev/net/tun
     sysctls:
       - net.ipv4.ip_forward=1
+    networks:
+      - vpn-network
     ports:
       - "2402:2402/udp"
     volumes:
@@ -24,6 +31,8 @@ services:
     # ports:
     #   - "1389:1389"
     #   - "1636:1636"
+    networks:
+      - vpn-network
     environment:
       - LDAP_ADMIN_USERNAME=admin
       - LDAP_ADMIN_PASSWORD=adminpassword

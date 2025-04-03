@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
 
-echo "Включение IP Forwarding..."
-sysctl -w net.ipv4.ip_forward=1 > /dev/null 2>&1 || echo "Предупреждение: Не удалось включить IP Forwarding (возможно, нужны права или уже включено)."
-
 TA_KEY="/etc/openvpn/easy-rsa/ta.key"
 PKI_DIR="/etc/openvpn/easy-rsa/pki"
 EASYRSA_DIR="/etc/openvpn/easy-rsa"
@@ -85,9 +82,6 @@ else
     # Проверяем наличие клиентского сертификата
     create_client_cert "$CLIENT_NAME"
 fi
-
-# Убедимся, что каталог для server.conf существует
-mkdir -p /etc/openvpn/server
 
 # Настройка iptables
 echo "Настройка IPTables..."
